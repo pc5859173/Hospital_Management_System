@@ -28,6 +28,13 @@ class Patients(db.Model):
     disease =db.Column(db.String(100)) 
     dept = db.Column(db.String(100))
     number = db.Column(db.String(100))
+
+# Doctors Class
+class Doctors(db.Model):
+    did = db.Column(db.Integer, primary_key = True)
+    email = db.Column(db.String(1000))  
+    doctorname = db.Column(db.String(100))
+    dept = db.Column(db.String(100))    
     
 
 @app.route('/')
