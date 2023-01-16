@@ -61,6 +61,7 @@ def login():
 def signup():
     if request.method=="POST":
         print("This is post method")
+    print("This is get method")    
     return render_template("signup.html") 
 
 @app.route('/logout')
