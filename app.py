@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template,request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -36,10 +36,38 @@ class Doctors(db.Model):
     doctorname = db.Column(db.String(100))
     dept = db.Column(db.String(100))    
     
-
+# here we will pass endpoints and run the function
 @app.route('/')
-def index():
-    return ("test page")
+def home():
+    return render_template("home.html")
+
+@app.route('/doctors')
+def doctors():
+    return render_template("doctor.html")    
+
+@app.route('/patients')
+def patients():
+    return render_template("patient.html") 
+
+@app.route('/bookings')
+def bookings():
+    return render_template("booking.html") 
+
+@app.route('/login')
+def login():
+    return render_template("login.html") 
+
+@app.route('/signup',methods = ["POST","GET"])
+def signup():
+    if request.method=="POST":
+        print("This is post method")
+    return render_template("signup.html") 
+
+@app.route('/logout')
+def logout():
+    return render_template("login.html")    
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
