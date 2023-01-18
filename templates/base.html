@@ -46,7 +46,7 @@
           </div>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link " href="/patients" ><b>Patients</b></a>
+          <a class="nav-link " href="/patients" ><b>Patients Booking</b></a>
         </li>
         <li class="nav-item">
             <a class="nav-link " href="/bookings" ><b> Booking Details</b></a>
@@ -58,9 +58,13 @@
             <a class="nav-link " href="/booking" >Booking Details</a>
           </li>  -->
       </ul>
-      <a class="btn btn-outline-info m-lg-1" href="/login"><b>Login / Signup</b></a>
-        <a class="btn btn-outline-info " href="/logout"><b>Logout</b></a>
+      {% if current_user.is_authenticated %}
+      <a class="nav-link m-lg-1" href="/"><b>WELCOME {{current_user.username}}</b></a>
+        <a class="btn btn-outline-danger " href="/logout"><b>Logout</b></a>
       
+      {% else %}
+      <a class="btn btn-outline-info m-lg-1" href="/login"><b>Login / Signup</b></a>
+      {% endif %}
       
     </div>
   </nav>
