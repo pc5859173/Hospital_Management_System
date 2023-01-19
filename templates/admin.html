@@ -1,0 +1,38 @@
+{% extends 'baselogin.html' %}
+
+{% block form %}
+        <div class="containerI">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+               <section class="container1 forms">
+                    <div class="form login">
+                        <div class="form-content">
+                            <header>Login</header>
+                            <form action="/login" method="post" id="logFrm">
+                                <div class="field input-field">
+                                    <input type="text" placeholder="Enter SRF ID" class="input" name="srf" required>
+                                </div>
+                
+                                <div class="field input-field">
+                                    <input type="date" placeholder="Enter DOB" class="password" name="dob" required>
+                                    <!-- <i class='bx bx-hide eye-icon'></i> -->
+                                </div>
+                
+                                <!-- <div class="form-link">
+                                    <a href="#" class="forgot-pass">Forgot password?</a>
+                                </div> -->
+                                <br>
+                                <button type="button" class="btn btn-success btn-lg btn-block">Login</button>
+                            </form>
+                
+                            <div class="form-link">
+                                <span>Don't have an account? <a href="/signup" class="link signup-link">Signup</a></span>
+                            </div>
+                        </div>
+               
+          </div>
+          <div class="col-md-4"></div>
+
+     </div>
+{% endblock form %}
