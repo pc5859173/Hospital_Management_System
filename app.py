@@ -56,7 +56,7 @@ class Doctors(db.Model):
 # route for home 
 @app.route('/')
 def home():
-    return render_template("admin.html")
+    return render_template("user_signup.html")
     # return render_template("index.html")
 
 # route for doctors 
