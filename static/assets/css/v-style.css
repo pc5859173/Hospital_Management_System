@@ -190,10 +190,10 @@ a.google span{
     transition: all ease-in-out 0.4s;
 } */
 .dropbtn {
-    background-color: #04AA6D;
-    color: white;
+    background-color: white;
+    color: black;
     padding: 16px;
-    font-size: 16px;
+    font-size: 12px;
     border: none;
   }
   

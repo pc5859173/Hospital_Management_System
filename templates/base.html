@@ -87,21 +87,33 @@
         <!-- MENU LINKS -->
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/home" class="smoothScroll">Home</a></li>
+            <li><a href="/" class="smoothScroll">Home</a></li>
             <li><a href="/doctors" class="smoothScroll">Doctors</a></li>
-            <li><a href="/bookings" class="smoothScroll">Bookings</a></li>
-            <li><a href="/patients" class="smoothScroll">patients</a></li>
-
+            <li><a href="/bookings" class="smoothScroll">Booking Details</a></li>
+            <li><a href="#" class="smoothScroll">patient Booking</a></li>
+            {% if current_user.is_authenticated %}
             <li>
               <div class="dropdown">
-                <button class="dropbtn">Login</button>
-                <div class="dropdown-content">
-                  <a href="/plogin">Patiens Login</a>
-                  <a href="/dlogin">Doctors Login</a>
-                  <a href="/admin">Admin Login</a>
-                </div>
+                <button class="dropbtn"><b>WELCOME {{current_user.username}}</button>
+                
               </div>
-            </li>
+          </li>  
+              <li class="appointment-btn">
+               <a href="/logout">Logout</a>
+             </li>
+             {% else %}
+             <li>
+               <div class="dropdown">
+                 <button class="dropbtn">Login</button>
+                 <div class="dropdown-content">
+                   <a href="/plogin">Patiens Login</a>
+                   <a href="/dlogin">Doctors Login</a>
+                   <a href="/admin">Admin Login</a>
+                 </div>
+               </div>
+             </li>
+             {% endif %}
+          
 
             <!-- <li class="nav-item dropdown">
                               <a class="smoothScroll" href="#" id="navbarDropdown"  data-toggle="dropdown"

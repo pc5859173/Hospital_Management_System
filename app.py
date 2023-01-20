@@ -71,36 +71,34 @@ def doctors():
     return render_template("doctors.html")    
 
 # route for patients
-@app.route('/patients', methods = ["POST", "GET"])
-@login_required
+@app.route('/patients')
 def patients():
-     if request.method == "POST":
+    #  if request.method == "POST":
        
-        email = request.form['email']
-        name = request.form['name']
-        gender = request.form['gender']
-        slot = request.form['slot']
-        time = request.form['time']
-        date = request.form['date']
-        disease =request.form['disease'] 
-        dept = request.form['dept']
-        number = request.form['number']
+    #     email = request.form['email']
+    #     name = request.form['name']
+    #     gender = request.form['gender']
+    #     slot = request.form['slot']
+    #     time = request.form['time']
+    #     date = request.form['date']
+    #     disease =request.form['disease'] 
+    #     dept = request.form['dept']
+    #     number = request.form['number']
         
         
-        # method to save data in db
-        entry = Patients(email = email, name = name, gender = gender, slot = slot  ,time =time ,date =date ,disease =disease ,dept =dept, number = number)
-        db.session.add(entry)
-        db.session.commit()
-        flash("Booking Confirmed", "info")
+    #     # method to save data in db
+    #     entry = Patients(email = email, name = name, gender = gender, slot = slot  ,time =time ,date =date ,disease =disease ,dept =dept, number = number)
+    #     db.session.add(entry)
+    #     db.session.commit()
+    #     flash("Booking Confirmed", "info")
      return render_template("Patients.html") 
 
 # route for bookings
 @app.route('/bookings')
-@login_required
 def bookings(): 
-    em=current_user.email
-    query=db.engine.execute(f"SELECT * FROM [dbo].[patients] WHERE email='{em}'")
-    return render_template('booking.html', query=query)
+    # em=current_user.email
+    # query=db.engine.execute(f"SELECT * FROM [dbo].[patients] WHERE email='{em}'")
+    return render_template('Bookings.html')
 
 # route for edit in booking page
 @app.route("/edit/<string:pid>",methods=['POST','GET'])
