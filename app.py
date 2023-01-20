@@ -56,13 +56,19 @@ class Doctors(db.Model):
 # route for home 
 @app.route('/')
 def home():
-    return render_template("user_signup.html")
+    # return render_template("Patient_login.html")
+    # return render_template("Patient_signup.html")
+    # return render_template("Doctor_login.html")
+    # return render_template("Doctor_signup.html")
+    # return render_template("admin.html")
     # return render_template("index.html")
+    # return render_template("contact.html")
+    return render_template("home.html")
 
 # route for doctors 
 @app.route('/doctors')
 def doctors():
-    return render_template("doctor.html")    
+    return render_template("doctors.html")    
 
 # route for patients
 @app.route('/patients', methods = ["POST", "GET"])
@@ -86,7 +92,7 @@ def patients():
         db.session.add(entry)
         db.session.commit()
         flash("Booking Confirmed", "info")
-     return render_template("patient.html") 
+     return render_template("Patients.html") 
 
 # route for bookings
 @app.route('/bookings')
@@ -139,8 +145,8 @@ def login():
             return redirect(url_for('home'))
         else:
             flash("Invalid Credentials" , "danger") 
-            return redirect(url_for('login'))   
-     return render_template("login.html") 
+            return redirect(url_for('home'))   
+     return render_template("home.html") 
 
 # route for signup
 @app.route('/signup',methods = ["POST","GET"])
@@ -174,6 +180,32 @@ def logout():
     logout_user()
     flash("logout Successfull", "warning")
     return redirect(url_for("login"))  
+
+
+# route for admin
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')    
+
+# route for patient login
+@app.route('/plogin')
+def plogin():
+    return render_template('Patient_login.html')     
+
+# route for patient signup
+@app.route('/psignup')
+def psignup():
+    return render_template('Patient_signup.html')      
+
+# route for doctor login
+@app.route('/dlogin')
+def dlogin():
+    return render_template('Doctor_login.html')
+
+# route for doctor signup
+@app.route('/dsignup')
+def dsignup():
+    return render_template('Doctor_signup.html')         
 
 
 

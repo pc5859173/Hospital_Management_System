@@ -1,92 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <title>{% block title %} {% endblock title %}</title>
 
-     <!-- <title>{% block title %}
-          
-     {% endblock title %}</title> -->
-<!--
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Tooplate" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
 
-Template 2098 Health
+    <link rel="stylesheet" href="../static/assets/css//bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../static/assets/css/animate.css" />
+    <link rel="stylesheet" href="../static/assets/css/owl.carousel.css" />
+    <link
+      rel="stylesheet"
+      href="../static/assets/css/owl.theme.default.min.css"
+    />
 
-http://www.tooplate.com/view/2098-health
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="../static/assets/css/tooplate-style.css" />
+    <link rel="stylesheet" href="../static/assets/css/v-style.css" />
+  </head>
+  <body
+    id="top"
+    data-spy="scroll"
+    data-target=".navbar-collapse"
+    data-offset="50"
+  >
+    <!-- PRE LOADER -->
+    <section class="preloader">
+      <div class="spinner">
+        <span class="spinner-rotate"></span>
+      </div>
+    </section>
 
--->
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-     <meta name="description" content="">
-     <meta name="keywords" content="">
-     <meta name="author" content="Tooplate">
-     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-      <link rel="stylesheet" href="../static/assets/css//bootstrap.min.css">
-     <link rel="stylesheet" href="../static/assets/css/font-awesome.min.css">
-     <link rel="stylesheet" href="../static/assets/css/animate.css">
-     <link rel="stylesheet" href="../static/assets/css/owl.carousel.css">
-     <link rel="stylesheet" href="../static/assets/css/owl.theme.default.min.css">
-
-     <!-- MAIN CSS -->
-     <link rel="stylesheet" href="../static/assets/css/tooplate-style.css">
-
-</head>
-<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
-
-     <!-- PRE LOADER -->
-     <section class="preloader">
-          <div class="spinner">
-
-               <span class="spinner-rotate"></span>
-               
+    <!-- HEADER -->
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-5">
+            <p>Welcome to a Professional Health Care</p>
           </div>
-     </section>
 
-
-     <!-- HEADER -->
-     <header>
-          <div class="container">
-               <div class="row">
-
-                    <div class="col-md-4 col-sm-5">
-                         <p>Welcome to a Professional Health Care</p>
-                    </div>
-                         
-                    <div class="col-md-8 col-sm-7 text-align-right">
-                         <span class="phone-icon"><i class="fa fa-phone"></i> 010-060-0160</span>
-                         <span class="date-icon"><i class="fa fa-calendar-plus-o"></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
-                         <span class="email-icon"><i class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></span>
-                    </div>
-
-               </div>
+          <div class="col-md-8 col-sm-7 text-align-right">
+            <span class="phone-icon"
+              ><i class="fa fa-phone"></i> 010-060-0160</span
+            >
+            <span class="date-icon"
+              ><i class="fa fa-calendar-plus-o"></i> 6:00 AM - 10:00 PM
+              (Mon-Fri)</span
+            >
+            <span class="email-icon"
+              ><i class="fa fa-envelope-o"></i>
+              <a href="#">info@company.com</a></span
+            >
           </div>
-     </header>
+        </div>
+      </div>
+    </header>
 
+    <!-- MENU -->
+    <section class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+          >
+            <span class="icon icon-bar"></span>
+            <span class="icon icon-bar"></span>
+            <span class="icon icon-bar"></span>
+          </button>
 
-     <!-- MENU -->
-     <section class="navbar navbar-default navbar-static-top" role="navigation">
-          <div class="container">
+          <!-- lOGO TEXT HERE -->
+          <a href="index.html" class="navbar-brand"
+            ><i class="fa fa-h-square"></i>ealth Center</a
+          >
+        </div>
 
-               <div class="navbar-header">
-                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                    </button>
+        <!-- MENU LINKS -->
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/home" class="smoothScroll">Home</a></li>
+            <li><a href="/doctors" class="smoothScroll">Doctors</a></li>
+            <li><a href="/bookings" class="smoothScroll">Bookings</a></li>
+            <li><a href="/patients" class="smoothScroll">patients</a></li>
 
-                    <!-- lOGO TEXT HERE -->
-                    <a href="index.html" class="navbar-brand"><i class="fa fa-h-square"></i>ealth Center</a>
-               </div>
+            <li>
+              <div class="dropdown">
+                <button class="dropbtn">Login</button>
+                <div class="dropdown-content">
+                  <a href="/plogin">Patiens Login</a>
+                  <a href="/dlogin">Doctors Login</a>
+                  <a href="/admin">Admin Login</a>
+                </div>
+              </div>
+            </li>
 
-               <!-- MENU LINKS -->
-               <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                         <li><a href="/home" class="smoothScroll">Home</a></li>
-                         <li><a href="#about" class="smoothScroll">About Us</a></li>
-                         <li><a href="/doctors" class="smoothScroll">Doctors</a></li>
-                         <li><a href="/bookings" class="smoothScroll">Bookings</a></li>
-                         <li><a href="/patients" class="smoothScroll">patients</a></li>
-                         <li><a href="/patients" class="smoothScroll">Login</a></li>
-                         
-                         <!-- <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
                               <a class="smoothScroll" href="#" id="navbarDropdown"  data-toggle="dropdown"
                                > Login </a>
                               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -95,68 +112,77 @@ http://www.tooplate.com/view/2098-health
                                 <a class="dropdown-item" href="/login">Doctors</a>
                               </div>
                          </li> -->
-                         <!-- <li class="dropdown"><a href="/login"><span>Login</span></a>
+            <!-- <li class="dropdown"><a href="/login"><span>Login</span></a>
                               <ul>
                                   <li><a href="/login">Patients Login</a></li>
                                   <li><a href="#">Doctors Login</a></li>
                                   <li><a href="/admin">Admin Login</a></li>
                               </ul>
                           </li> -->
-      
-                         <!-- <li><a href="#news" class="smoothScroll">News</a></li> -->
-                         <li><a href="#google-map" class="smoothScroll">Contact</a></li>
-                         <li class="appointment-btn"><a href="#appointment">Make an appointment</a></li>
-                    </ul>
-               </div>
 
+            <!-- <li><a href="#news" class="smoothScroll">News</a></li> -->
+            
+            <li class="appointment-btn">
+              <a href="#appointment">Make an appointment</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOME -->
+    <section id="home" class="slider" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row">
+          <div class="owl-carousel owl-theme">
+            <div class="item item-first">
+              <div class="caption">
+                <div class="col-md-offset-1 col-md-10">
+                  <h3>Let's make your life happier</h3>
+                  <h1>Healthy Living</h1>
+                  <a
+                    href="#team"
+                    class="section-btn btn btn-default smoothScroll"
+                    >Meet Our Doctors</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="item item-second">
+              <div class="caption">
+                <div class="col-md-offset-1 col-md-10">
+                  <h3>Aenean luctus lobortis tellus</h3>
+                  <h1>New Lifestyle</h1>
+                  <a
+                    href="#about"
+                    class="section-btn btn btn-default btn-gray smoothScroll"
+                    >More About Us</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="item item-third">
+              <div class="caption">
+                <div class="col-md-offset-1 col-md-10">
+                  <h3>Pellentesque nec libero nisi</h3>
+                  <h1>Your Health Benefits</h1>
+                  <a
+                    href="#news"
+                    class="section-btn btn btn-default btn-blue smoothScroll"
+                    >Read Stories</a
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-     </section>
+        </div>
+      </div>
+    </section>
 
-
-     <!-- HOME -->
-     <section id="home" class="slider" data-stellar-background-ratio="0.5">
-          <div class="container">
-               <div class="row">
-
-                         <div class="owl-carousel owl-theme">
-                              <div class="item item-first">
-                                   <div class="caption">
-                                        <div class="col-md-offset-1 col-md-10">
-                                             <h3>Let's make your life happier</h3>
-                                             <h1>Healthy Living</h1>
-                                             <a href="#team" class="section-btn btn btn-default smoothScroll">Meet Our Doctors</a>
-                                        </div>
-                                   </div>
-                              </div>
-
-                              <div class="item item-second">
-                                   <div class="caption">
-                                        <div class="col-md-offset-1 col-md-10">
-                                             <h3>Aenean luctus lobortis tellus</h3>
-                                             <h1>New Lifestyle</h1>
-                                             <a href="#about" class="section-btn btn btn-default btn-gray smoothScroll">More About Us</a>
-                                        </div>
-                                   </div>
-                              </div>
-
-                              <div class="item item-third">
-                                   <div class="caption">
-                                        <div class="col-md-offset-1 col-md-10">
-                                             <h3>Pellentesque nec libero nisi</h3>
-                                             <h1>Your Health Benefits</h1>
-                                             <a href="#news" class="section-btn btn btn-default btn-blue smoothScroll">Read Stories</a>
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
-
-               </div>
-          </div>
-     </section>
-
-
-     <!-- ABOUT -->
-     <section id="about">
+    <!-- ABOUT -->
+    <!-- <section id="about">
           <div class="container">
                <div class="row">
 
@@ -179,11 +205,11 @@ http://www.tooplate.com/view/2098-health
                     
                </div>
           </div>
-     </section>
+     </section>  
+ -->
 
-
-     <!-- TEAM -->
-     <section id="team" data-stellar-background-ratio="1">
+    <!-- TEAM -->
+    <!-- <section id="team" data-stellar-background-ratio="1">
           <div class="container">
                <div class="row">
 
@@ -258,24 +284,23 @@ http://www.tooplate.com/view/2098-health
                     
                </div>
           </div>
-     </section>
+     </section> -->
 
-
-     <!-- NEWS -->
-     <section id="news" data-stellar-background-ratio="2.5">
+    <!-- NEWS -->
+    <!-- <section id="news" data-stellar-background-ratio="2.5">
           <div class="container">
                <div class="row">
 
-                    <div class="col-md-12 col-sm-12">
-                         <!-- SECTION TITLE -->
-                         <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-md-12 col-sm-12"> -->
+    <!-- SECTION TITLE -->
+    <!-- <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
                               <h2>Latest News</h2>
                          </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-6">
-                         <!-- NEWS THUMB -->
-                         <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="col-md-4 col-sm-6"> -->
+    <!-- NEWS THUMB -->
+    <!-- <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
                               <a href="news-detail.html">
                                    <img src="../static/assets/images/news-image1.jpg" class="img-responsive" alt="">
                               </a>
@@ -294,9 +319,9 @@ http://www.tooplate.com/view/2098-health
                          </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-6">
-                         <!-- NEWS THUMB -->
-                         <div class="news-thumb wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="col-md-4 col-sm-6"> -->
+    <!-- NEWS THUMB -->
+    <!-- <div class="news-thumb wow fadeInUp" data-wow-delay="0.6s">
                               <a href="news-detail.html">
                                    <img src="../static/assets/images/news-image2.jpg" class="img-responsive" alt="">
                               </a>
@@ -315,9 +340,9 @@ http://www.tooplate.com/view/2098-health
                          </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-6">
-                         <!-- NEWS THUMB -->
-                         <div class="news-thumb wow fadeInUp" data-wow-delay="0.8s">
+                    <div class="col-md-4 col-sm-6"> -->
+    <!-- NEWS THUMB -->
+    <!-- <div class="news-thumb wow fadeInUp" data-wow-delay="0.8s">
                               <a href="news-detail.html">
                                    <img src="../static/assets/images/news-image3.jpg" class="img-responsive" alt="">
                               </a>
@@ -337,12 +362,11 @@ http://www.tooplate.com/view/2098-health
                     </div>
 
                </div>
-          </div>
-     </section>
+          </div> -->
+    <!-- </section>  -->
 
-
-     <!-- MAKE AN APPOINTMENT -->
-     <section id="appointment" data-stellar-background-ratio="3">
+    <!-- MAKE AN APPOINTMENT -->
+    <!-- <section id="appointment" data-stellar-background-ratio="3">
           <div class="container">
                <div class="row">
 
@@ -350,12 +374,12 @@ http://www.tooplate.com/view/2098-health
                          <img src="../static/assets/images/appointment-image.jpg" class="img-responsive" alt="">
                     </div>
 
-                    <div class="col-md-6 col-sm-6">
-                         <!-- CONTACT FORM HERE -->
-                         <form id="appointment-form" role="form" method="post" action="#">
+                    <div class="col-md-6 col-sm-6"> -->
+    <!-- CONTACT FORM HERE -->
+    <!-- <form id="appointment-form" role="form" method="post" action="#"> -->
 
-                              <!-- SECTION TITLE -->
-                              <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
+    <!-- SECTION TITLE -->
+    <!-- <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
                                    <h2>Make an appointment</h2>
                               </div>
 
@@ -397,24 +421,22 @@ http://www.tooplate.com/view/2098-health
                     </div>
 
                </div>
-          </div>
-     </section>
+          </div> -->
+    <!-- </section>  -->
 
-
-     <!-- GOOGLE MAP -->
-     <section id="google-map">
-     <!-- How to change your own map point
+    <!-- GOOGLE MAP -->
+    <!-- <section id="google-map">  -->
+    <!-- How to change your own map point
             1. Go to Google Maps
             2. Click on your location point
             3. Click "Share" and choose "Embed map" tab
             4. Copy only URL and paste it within the src="" field below
 	-->
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3647.3030413476204!2d100.5641230193719!3d13.757206847615207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf51ce6427b7918fc!2sG+Tower!5e0!3m2!1sen!2sth!4v1510722015945" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
-     </section>           
+    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3647.3030413476204!2d100.5641230193719!3d13.757206847615207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf51ce6427b7918fc!2sG+Tower!5e0!3m2!1sen!2sth!4v1510722015945" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+     </section>           -->
 
-
-     <!-- FOOTER -->
-     <footer data-stellar-background-ratio="5">
+    <!-- FOOTER -->
+    <!-- <footer data-stellar-background-ratio="5">
           <div class="container">
                <div class="row">
 
@@ -495,19 +517,18 @@ http://www.tooplate.com/view/2098-health
                          </div>   
                     </div>
                     
-               </div>
-          </div>
-     </footer>
-
-     <!-- SCRIPTS -->
-     <script src="../static/assets/js/jquery.js"></script>
-     <script src="../static/assets/js/bootstrap.min.js"></script>
-     <script src="../static/assets/js/jquery.sticky.js"></script>
-     <script src="../static/assets/js/jquery.stellar.min.js"></script>
-     <script src="../static/assets/js/wow.min.js"></script>
-     <script src="../static/assets/js/smoothscroll.js"></script>
-     <script src="../static/assets/js/owl.carousel.min.js"></script>
-     <script src="../static/assets/js/custom.js"></script>
-
-</body>
+               </div> -->
+    <!-- </div>
+     </footer>  -->
+    {% block body %}{% endblock body %}
+    <!-- SCRIPTS -->
+    <script src="../static/assets/js/jquery.js"></script>
+    <script src="../static/assets/js/bootstrap.min.js"></script>
+    <script src="../static/assets/js/jquery.sticky.js"></script>
+    <script src="../static/assets/js/jquery.stellar.min.js"></script>
+    <script src="../static/assets/js/wow.min.js"></script>
+    <script src="../static/assets/js/smoothscroll.js"></script>
+    <script src="../static/assets/js/owl.carousel.min.js"></script>
+    <script src="../static/assets/js/custom.js"></script>
+  </body>
 </html>
