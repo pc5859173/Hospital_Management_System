@@ -7,3 +7,16 @@
             <li><a href="/" class="smoothScroll">Home</a></li>
             
 {% endblock navbar %}
+
+{% block dropdown %}
+<li>
+<div class="dropdown">
+    <button class="dropbtn">Login</button>
+    <div class="dropdown-content">
+      <a href="/plogin">Patients Login</a>
+      <a href="/dlogin">Doctors Login</a>
+      <a href="/admin">Admin Login</a>
+    </div>
+  </div>
+</li>
+{% endblock dropdown %}

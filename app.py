@@ -23,7 +23,7 @@ login_manager.login_view='login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return User_p.query.get(int(user_id))
 
 # database connection
 app.config["SQLALCHEMY_DATABASE_URI"] = "mssql+pyodbc://priya01:Priya#8789@pc-test.database.windows.net/hmsdb?driver=SQL+Server"
@@ -32,14 +32,21 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # user class
-class User(UserMixin, db.Model):
+class User_p(UserMixin, db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username =  db.Column(db.String(100))  
     email = db.Column(db.String(100))
     password = db.Column(db.String(1000))
 
-# patient class
-class Patients(db.Model):
+# Doctor class
+class User_d(UserMixin, db.Model):
+    did = db.Column(db.Integer,primary_key = True)
+    username =  db.Column(db.String(100))  
+    email = db.Column(db.String(100))
+    password = db.Column(db.String(1000))    
+
+# patient form class
+class Patients_book(db.Model):
     pid = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(100))       
     name = db.Column(db.String(100))
@@ -51,9 +58,9 @@ class Patients(db.Model):
     dept = db.Column(db.String(100))
     number = db.Column(db.String(100))
 
-# Doctors Class
-class Doctors(db.Model):
-    did = db.Column(db.Integer, primary_key = True)
+# Doctors department booking Class
+class Doctors_dept(db.Model):
+    ddid = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(1000))  
     doctorname = db.Column(db.String(100))
     dept = db.Column(db.String(100))    
@@ -80,24 +87,24 @@ def doctors():
 # route for patients
 @app.route('/patients')
 def patients():
-    #  if request.method == "POST":
+     if request.method == "POST":
        
-    #     email = request.form['email']
-    #     name = request.form['name']
-    #     gender = request.form['gender']
-    #     slot = request.form['slot']
-    #     time = request.form['time']
-    #     date = request.form['date']
-    #     disease =request.form['disease'] 
-    #     dept = request.form['dept']
-    #     number = request.form['number']
+        email = request.form['email']
+        name = request.form['name']
+        gender = request.form['gender']
+        slot = request.form['slot']
+        time = request.form['time']
+        date = request.form['date']
+        disease =request.form['disease'] 
+        dept = request.form['dept']
+        number = request.form['number']
         
         
-    #     # method to save data in db
-    #     entry = Patients(email = email, name = name, gender = gender, slot = slot  ,time =time ,date =date ,disease =disease ,dept =dept, number = number)
-    #     db.session.add(entry)
-    #     db.session.commit()
-    #     flash("Booking Confirmed", "info")
+        # method to save data in db
+        entry = Patients_book(email = email, name = name, gender = gender, slot = slot  ,time =time ,date =date ,disease =disease ,dept =dept, number = number)
+        db.session.add(entry)
+        db.session.commit()
+        flash("Booking Confirmed", "info")
      return render_template("Patients.html") 
 
 # route for bookings
@@ -111,7 +118,7 @@ def bookings():
 @app.route("/edit/<string:pid>",methods=['POST','GET'])
 @login_required
 def edit(pid):
-    posts = Patients.query.filter_by(pid=pid).first()
+    posts = Patients_book.query.filter_by(pid=pid).first()
     if request.method=="POST":
         email=request.form.get('email')
         name=request.form.get('name')
@@ -136,47 +143,47 @@ def delete(pid):
     return redirect(url_for('bookings'))   
 
 # route for login
-@app.route('/login', methods = ["POST", "GET"])
-def login():
-     if request.method=="POST":
-        email = request.form.get('email')
-        password = request.form.get('password')
+# @app.route('/login', methods = ["POST", "GET"])
+# def login():
+    #  if request.method=="POST":
+    #     email = request.form.get('email')
+    #     password = request.form.get('password')
         
-        user=User.query.filter_by(email=email).first()
+    #     user=User.query.filter_by(email=email).first()
 
-        if user and check_password_hash(user.password,password):
-            login_user(user)
-            flash("Login Successfull", "success")
-            return redirect(url_for('home'))
-        else:
-            flash("Invalid Credentials" , "danger") 
-            return redirect(url_for('home'))   
-     return render_template("home.html") 
+    #     if user and check_password_hash(user.password,password):
+    #         login_user(user)
+    #         flash("Login Successfull", "success")
+    #         return redirect(url_for('home'))
+    #     else:
+    #         flash("Invalid Credentials" , "danger") 
+    #         return redirect(url_for('home'))   
+    #  return render_template("home.html") 
 
 # route for signup
-@app.route('/signup',methods = ["POST","GET"])
-def signup():
-    if request.method=="POST":
-        username =request.form.get('username')
-        email = request.form.get('email')
-        password = request.form.get('password')
+# @app.route('/signup',methods = ["POST","GET"])
+# def signup():
+#     if request.method=="POST":
+#         username =request.form.get('username')
+#         email = request.form.get('email')
+#         password = request.form.get('password')
         
-        user  = User.query.filter_by(email=email).first()
-        if user:
-            flash("Email Already Exists", "warning")
-            return render_template('signup.html')
-        encpassword = generate_password_hash(password)
+#         user  = User.query.filter_by(email=email).first()
+#         if user:
+#             flash("Email Already Exists", "warning")
+#             return render_template('signup.html')
+#         encpassword = generate_password_hash(password)
 
-        #  1 insert query to insert data in db
-        # new_user=db.engine.execute(f"INSERT INTO `user` (`username`,`email`,`password`) VALUES ('{username}','{email}','{encpassword}')")
+#         #  1 insert query to insert data in db
+#         # new_user=db.engine.execute(f"INSERT INTO `user` (`username`,`email`,`password`) VALUES ('{username}','{email}','{encpassword}')")
         
-        # 2 method to save data in db
-        entry = User(username=username, email=email, password=encpassword)   
-        db.session.add(entry)
-        db.session.commit() 
-        flash("Signup Successfull Please Login","primary")
-        return render_template('login.html') 
-    return render_template("signup.html") 
+#         # 2 method to save data in db
+#         entry = User(username=username, email=email, password=encpassword)   
+#         db.session.add(entry)
+#         db.session.commit() 
+#         flash("Signup Successfull Please Login","primary")
+#         return render_template('login.html') 
+#     return render_template("signup.html") 
 
 # route for logout
 @app.route('/logout')
@@ -184,7 +191,7 @@ def signup():
 def logout():
     logout_user()
     flash("logout Successfull", "warning")
-    return redirect(url_for("login"))  
+    return redirect(url_for("/"))  
 
 
 # route for admin
@@ -208,10 +215,111 @@ def apanel():
             return render_template('apanel.html')
         else:
             flash("Invalid credentials" )
-            return render_template('admin.html')              
-    return render_template('admin.html')    
+    return redirect( url_for('admin') )
 
 
+# route for patients page
+@app.route('/ppanel')
+def ppanel():
+    return render_template('ppanel.html')     
+
+# route for patient_signup
+@app.route('/psignup',methods = ["POST","GET"])
+def psignup():
+    if request.method=="POST":
+    #     print("This is post method")
+    # print("this is get method")    
+        username =request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        user  = User_p.query.filter_by(email=email).first()
+        if user:
+            flash("Email Already Exists", "warning")
+            return render_template('Patient_signup.html')
+        encpassword = generate_password_hash(password)
+
+        #  1 insert query to insert data in db
+        # new_user=db.engine.execute(f"INSERT INTO `user` (`username`,`email`,`password`) VALUES ('{username}','{email}','{encpassword}')")
+        
+        # 2 method to save data in db
+        entry = User_p(username=username, email=email, password=encpassword)   
+        db.session.add(entry)
+        db.session.commit() 
+        flash("Signup Successfull Please Login","primary")
+        return redirect(url_for('plogin')) 
+    return render_template("Patient_signup.html") 
+
+
+# route for patient_login
+@app.route('/plogin',methods = ['GET','POST'])
+def plogin():
+    if request.method=="POST":
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        user=User_p.query.filter_by(email=email).first()
+
+        if user and check_password_hash(user.password,password):
+            login_user(user)
+            flash("Login Successfull", "success")
+            return redirect(url_for('ppanel'))
+        else:
+            flash("Invalid Credentials" , "danger") 
+            return redirect(url_for('plogin'))   
+    return render_template("Patient_login.html")
+
+
+# route for Doctors page
+@app.route('/dpanel')
+def dpanel():
+    return render_template('dpanel.html')     
+
+# route for doctors_signup
+@app.route('/dsignup',methods = ["POST","GET"])
+def dsignup():
+    if request.method=="POST":
+    #     print("This is post method")
+    # print("this is get method")    
+        username =request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        user  = User_d.query.filter_by(email=email).first()
+        if user:
+            flash("Email Already Exists", "warning")
+            return render_template('Doctor_signup.html')
+        encpassword = generate_password_hash(password)
+
+        #  1 insert query to insert data in db
+        # new_user=db.engine.execute(f"INSERT INTO `user` (`username`,`email`,`password`) VALUES ('{username}','{email}','{encpassword}')")
+        
+        # 2 method to save data in db
+        entry = User_d(username=username, email=email, password=encpassword)   
+        db.session.add(entry)
+        db.session.commit() 
+        flash("Signup Successfull Please Login","primary")
+        return redirect(url_for('dlogin')) 
+    return render_template("Doctor_signup.html") 
+
+
+# route for doctors_login
+@app.route('/dlogin',methods = ['GET','POST'])
+def dlogin():
+    if request.method=="POST":
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        user=User_d.query.filter_by(email=email).first()
+
+        if user and check_password_hash(user.password,password):
+            login_user(user)
+            flash("Login Successfull", "success")
+            return redirect(url_for('dpanel'))
+        else:
+            flash("Invalid Credentials" , "danger") 
+            return redirect(url_for('dlogin'))   
+    return render_template("Doctor_login.html")     
 
 if __name__ == '__main__':
     app.run(debug=True)

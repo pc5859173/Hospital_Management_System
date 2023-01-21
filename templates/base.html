@@ -90,15 +90,20 @@
                {% block navbar %}
                     
                {% endblock navbar %}
-            {% if current_user.is_authenticated %}
+
+               {% block dropdown %}
+                    
+               {% endblock dropdown %}
+
+            <!-- {% if current_user.is_authenticated %}
             <li>
               <div class="dropdown">
-                <button class="dropbtn"><b>WELCOME {{current_user.username}}</button>
+                <button class="dropbtn"><b>WELCOME {{current_user.name}}</button>
                 
               </div>
           </li>  
               <li class="appointment-btn">
-               <a href="/logout">Logout</a>
+               <a href="/plogout">Logout</a>
              </li>
              {% else %}
              <li>
@@ -111,7 +116,7 @@
                  </div>
                </div>
              </li>
-             {% endif %}
+             {% endif %} -->
           
 
             <!-- <li class="nav-item dropdown">
