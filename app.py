@@ -109,9 +109,9 @@ def patientsbook():
 # route for bookings
 @app.route('/bookings')
 def bookings(): 
-    # em=current_user.email
-    # query=db.engine.execute(f"SELECT * FROM [dbo].[patients] WHERE email='{em}'")
-    return redirect(url_for('/bookings'))
+    em=current_user.email
+    query=db.engine.execute(f"SELECT * FROM [dbo].[patients_book] WHERE email='{em}'")
+    return redirect(url_for('/bookings', query= query))
 
 # route for edit in booking page
 @app.route("/edit/<string:pid>",methods=['POST','GET'])
@@ -190,7 +190,7 @@ def delete(pid):
 def logout():
     logout_user()
     flash("logout Successfull", "warning")
-    return redirect(url_for("/"))  
+    return render_template('home.html')
 
 
 # route for admin
