@@ -25,6 +25,11 @@ login_manager.login_view='login'
 def load_user(user_id):
     return User_p.query.get(int(user_id))
 
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User_d.query.get(int(user_id))
+
+
 # database connection
 app.config["SQLALCHEMY_DATABASE_URI"] = "mssql+pyodbc://priya01:Priya#8789@pc-test.database.windows.net/hmsdb?driver=SQL+Server"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -71,12 +76,6 @@ class Doctors_dept(db.Model):
 @app.route('/')
 def home():
     # return render_template("Patient_login.html")
-    # return render_template("Patient_signup.html")
-    # return render_template("Doctor_login.html")
-    # return render_template("Doctor_signup.html")
-    # return render_template("admin.html")
-    # return render_template("index.html")
-    # return render_template("contact.html")
     return render_template("home.html")
 
 # route for doctors 
@@ -85,8 +84,8 @@ def doctors():
     return render_template("doctors.html")    
 
 # route for patients
-@app.route('/patients')
-def patients():
+@app.route('/patientsbook')
+def patientsbook():
      if request.method == "POST":
        
         email = request.form['email']
@@ -105,14 +104,14 @@ def patients():
         db.session.add(entry)
         db.session.commit()
         flash("Booking Confirmed", "info")
-     return render_template("Patients.html") 
+     return render_template('Patients_book.html')
 
 # route for bookings
 @app.route('/bookings')
 def bookings(): 
     # em=current_user.email
     # query=db.engine.execute(f"SELECT * FROM [dbo].[patients] WHERE email='{em}'")
-    return render_template('Bookings.html')
+    return redirect(url_for('/bookings'))
 
 # route for edit in booking page
 @app.route("/edit/<string:pid>",methods=['POST','GET'])
