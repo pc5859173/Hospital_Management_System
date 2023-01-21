@@ -4,7 +4,12 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import login_user, logout_user, login_manager,LoginManager
 from flask_login import login_required,current_user
+import json
 
+
+# read config.json file
+with open('config.json','r') as c:
+    params = json.load(c)["params"]
 
 app = Flask(__name__)
 app.secret_key = "priyachoudhary"
@@ -12,6 +17,8 @@ app.secret_key = "priyachoudhary"
 # this is for getting unique user access
 login_manager=LoginManager(app)
 login_manager.login_view='login'
+
+
 
 
 @login_manager.user_loader
@@ -185,25 +192,24 @@ def logout():
 def admin():
     return render_template('admin.html')    
 
-# route for patient login
-@app.route('/plogin')
-def plogin():
-    return render_template('Patient_login.html')     
+#route for admin panel
+@app.route('/apanel', methods=['GET', 'POST'])
+def apanel():
+    if request.method == 'POST':
+        name =request.form.get('username')
+        pwd = request.form.get('password')
+        # print(name, pwd)
+        # if( params['username']==name and params['password']==pwd):
+        if(name==params["username"] and pwd==params["password"]):
 
-# route for patient signup
-@app.route('/psignup')
-def psignup():
-    return render_template('Patient_signup.html')      
-
-# route for doctor login
-@app.route('/dlogin')
-def dlogin():
-    return render_template('Doctor_login.html')
-
-# route for doctor signup
-@app.route('/dsignup')
-def dsignup():
-    return render_template('Doctor_signup.html')         
+            session['user']=name
+            
+            flash("Successfully login")
+            return render_template('apanel.html')
+        else:
+            flash("Invalid credentials" )
+            return render_template('admin.html')              
+    return render_template('admin.html')    
 
 
 

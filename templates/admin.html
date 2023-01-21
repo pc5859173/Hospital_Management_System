@@ -3,32 +3,36 @@
 {% block form %}
         <div class="containerI">
           <div class="col-md-4">
+          
           </div>
           <div class="col-md-4">
+            
                <section class="container1 forms">
                     <div class="form login">
                         <div class="form-content">
-                            <header>Admin Login</header>
-                            <form action="/login" method="post" id="logFrm">
-                                <div class="field input-field">
-                                    <input type="email" placeholder="Enter username" class="input" name="username" required>
+                            <h4 class="text-center">Admin login here</h4>
+                              
+                            
+                            <form action="/apanel" method="post" id="logFrm">
+                   <div class="field input-field">
+                                    <input type="text" placeholder="Enter username" class="input" name="username" required>
                                 </div>
                 
                                 <div class="field input-field">
                                     <input type="text" placeholder="Enter password" class="password" name="password" required>
-                                    <!-- <i class='bx bx-hide eye-icon'></i> -->
+                                    <i class='bx bx-hide eye-icon'></i>
                                 </div>
                 
                                 <!-- <div class="form-link">
                                     <a href="#" class="forgot-pass">Forgot password?</a>
                                 </div> -->
                                 <br>
-                                <button type="button" class="btn btn-success btn-lg btn-block">Login</button>
+                                <button type="submit" class="btn btn-success btn-lg btn-block">Login</button>
                             </form>
                 
-                            <div class="form-link">
+                           <!-- <div class="form-link">
                                 <span>Don't have an account? <a href="/signup" class="link signup-link">Signup</a></span>
-                            </div>
+                            </div>  -->
                         </div>
                
           </div>

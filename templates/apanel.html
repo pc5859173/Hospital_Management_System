@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Admin Page{% endblock title %}
+{% block navbar %}
+<li><a href="/" class="smoothScroll">Home</a></li>
+<li><a href="/doctors" class="smoothScroll">Doctors</a></li>
+<li><a href="/bookings" class="smoothScroll">Booking Details</a></li>
+<li><a href="/patients" class="smoothScroll">patient Booking</a></li> 
+{% endblock navbar %}
+{% block form %}
+{% with messages = get_flashed_messages() %}  
+         {% if messages %}  
+               {% for message in messages %}  
+                    <p>{{ message }}</p>  
+               {% endfor %}  
+         {% endif %}  
+      {% endwith %}   
+{% endblock form %}
