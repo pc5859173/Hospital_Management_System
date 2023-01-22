@@ -22,8 +22,8 @@ login_manager.login_view='login'
 
 
 @login_manager.user_loader
-def load_user(user_id):
-    return User_p.query.get(int(user_id))
+def load_user(id):
+    return User_d.query.get(int(id))
 
 # @login_manager.user_loader
 # def load_user(user_id):
@@ -44,7 +44,7 @@ class User_p(UserMixin, db.Model):
     password = db.Column(db.String(1000))
 
 # Doctor class
-class User_d(UserMixin, db.Model):
+class UserD(UserMixin, db.Model):
     did = db.Column(db.Integer,primary_key = True)
     username =  db.Column(db.String(100))  
     email = db.Column(db.String(100))
@@ -308,8 +308,13 @@ def dlogin():
     if request.method=="POST":
         email = request.form.get('email')
         password = request.form.get('password')
+        print(email,password)
         
-        user=User_d.query.filter_by(email=email).first()
+        try:
+            user=User_d.query.filter_by(email=email).first()
+            print("succesfull")
+        except Exception as e:
+            print("not connected")
 
         if user and check_password_hash(user.password,password):
             login_user(user)
