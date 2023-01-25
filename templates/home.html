@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}
-     
+
 {% endblock title %}
 
 {% block navbar %}
-            <li><a href="/" class="smoothScroll">Home</a></li>
-            
+<li><a href="/" class="smoothScroll">Home</a></li>
+
 {% endblock navbar %}
 
 {% block dropdown %}
 <li>
-<div class="dropdown">
+  <div class="dropdown">
     <button class="dropbtn">Login</button>
     <div class="dropdown-content">
-      <a href="/plogin">Patients Login</a>
-      <a href="/dlogin">Doctors Login</a>
-      <a href="/admin">Admin Login</a>
+      <a href="/patient/login">Patients Login</a>
+      <a href="/doctor/login">Doctors Login</a>
+      <a href="/admin/login">Admin Login</a>
     </div>
   </div>
 </li>

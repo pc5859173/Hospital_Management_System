@@ -1,0 +1,25 @@
+{% extends 'baselogin.html' %}
+
+{% block form %}
+<section class="container1 forms">
+    <div class="form login">
+        <div class="form-content">
+            <header>Admin Login</header>
+            {% include "message.html" %}
+            <form action="/admin/home" method="post" >
+                <div class="field input-field">
+                    <input type="text" placeholder="Enter UserName" class="input" name="username" required>
+                </div>
+
+                <div class="field input-field">
+                    <input type="password" placeholder="Enter Password" class="password" name="password" required>
+                    <i class='bx bx-hide eye-icon'></i>
+                </div>
+
+                <div class="field button-field">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+</section>
+
+    {% endblock form %}

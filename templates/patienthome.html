@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
-{% block title %}Admin Page{% endblock title %}
+{% block title %}Patient Page{% endblock title %}
 
 
 {% block navbar %}
 <li><a href="/" class="smoothScroll">Home</a></li>
-<li><a href="/doctors" class="smoothScroll">Doctors</a></li>
 <li><a href="/bookings" class="smoothScroll">Booking Details</a></li>
-<li><a href="/patientsbook" class="smoothScroll">patient Booking</a></li>   
+<li><a href="/pbooking" class="smoothScroll">patient Booking</a></li>   
 {% endblock navbar %}
 
 {% block dropdown %}
-
 <li><a href="/logout" class="smoothScroll">Logout</a></li>
-
 {% endblock dropdown %}

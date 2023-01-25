@@ -1,13 +1,14 @@
+</html>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
      <title>{% block title %}
-          Booking Details</Details>
-     {% endblock title %}</title>
-
-
-<!-- Template 2098 Health
+          Doctors Department Booking
+          {% endblock title %}</title>
+     <!-- 
+Template 2098 Health
 
 http://www.tooplate.com/view/2098-health -->
 
@@ -19,18 +20,19 @@ http://www.tooplate.com/view/2098-health -->
      <meta name="author" content="Tooplate">
      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-      <link rel="stylesheet" href="../static/assets/css//bootstrap.min.css">
+     <link rel="stylesheet" href="../static/assets/css//bootstrap.min.css">
      <link rel="stylesheet" href="../static/assets/css/font-awesome.min.css">
      <link rel="stylesheet" href="../static/assets/css/animate.css">
      <link rel="stylesheet" href="../static/assets/css/owl.carousel.css">
      <link rel="stylesheet" href="../static/assets/css/owl.theme.default.min.css">
      <link rel="stylesheet" href="../static/assets/css/v-style.css">
-     
+
 
      <!-- MAIN CSS -->
      <link rel="stylesheet" href="../static/assets/css/tooplate-style.css">
 
 </head>
+
 <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
      <!-- PRE LOADER -->
@@ -38,7 +40,7 @@ http://www.tooplate.com/view/2098-health -->
           <div class="spinner">
 
                <span class="spinner-rotate"></span>
-               
+
           </div>
      </section>
 
@@ -51,11 +53,13 @@ http://www.tooplate.com/view/2098-health -->
                     <div class="col-md-4 col-sm-5">
                          <p>Welcome to a Professional Health Care</p>
                     </div>
-                         
+
                     <div class="col-md-8 col-sm-7 text-align-right">
                          <span class="phone-icon"><i class="fa fa-phone"></i> 010-060-0160</span>
-                         <span class="date-icon"><i class="fa fa-calendar-plus-o"></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
-                         <span class="email-icon"><i class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></span>
+                         <span class="date-icon"><i class="fa fa-calendar-plus-o"></i> 6:00 AM - 10:00 PM
+                              (Mon-Fri)</span>
+                         <span class="email-icon"><i class="fa fa-envelope-o"></i> <a
+                                   href="#">info@company.com</a></span>
                     </div>
 
                </div>
@@ -75,82 +79,52 @@ http://www.tooplate.com/view/2098-health -->
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="index.html" class="navbar-brand"><i class="fa fa-h-square"></i>Health Center</a>
+                    <a href="home.html" class="navbar-brand"><i class="fa fa-h-square"></i>Health Center</a>
                </div>
 
                <!-- MENU LINKS -->
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                         <li><a href="/" class="smoothScroll">Home</a></li>
-                         <li><a href="/doctors" class="smoothScroll">Doctors</a></li>
-                         <li><a href="/bookings" class="smoothScroll">Booking Details</a></li>
-                         <li><a href="/patientsbook" class="smoothScroll">patients Booking</a></li>
+                         <li><a href="/doctor/home" class="smoothScroll">Home</a></li>
+                         <li><a href="/doctor/department" class="smoothScroll">Doctors</a></li>
                          <li><a href="#" class="smoothScroll">Login</a></li>
-                        
-      
-                         <!-- <li><a href="#news" class="smoothScroll">News</a></li> -->
-                         <li class="appointment-btn"><a href="#appointment">Make an appointment</a></li>
+                         <li class="appointment-btn"><a href="/patientbooking">Make an appointment</a></li>
                     </ul>
                </div>
 
           </div>
      </section>
 
-{% block form %}
-<table class="table">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">PID</th>
-        <th scope="col">EMAIL</th>
-        <th scope="col">NAME</th>
-        <th scope="col">GENDER</th>
-        <th scope="col">SLOT</th>
-        <th scope="col">TIME</th>
-        <th scope="col">DATE</th>
-        <th scope="col">DISEASE</th>
-        <th scope="col">DR.DEPARTMENT</th>
-        <th scope="col">PHONE NUMBER</th>
-        <th scope="col">EDIT</th>
-        <th scope="col">DELETE</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for post in query %}
-      <tr>
-        <th scope="row">{{post.pid}}</th>
-        <td>{{post.email}}</td>
-        <td>{{post.name}}</td>
-        <td>{{post.gender}}</td>
-        <td>{{post.slot}}</td>
-        <td>{{post.time}}</td>
-        <td>{{post.date}}</td>
-        <td>{{post.disease}}</td>
-        <td>{{post.dept}}</td>
-        <td>{{post.number}}</td>
-        <td>
-          <a href="/edit/{{post.pid}}"
-            ><button class="btn btn-primary">Edit</button>
-          </a>
-        </td>
-        <td>
-          <a href="/delete/{{post.pid}}"
-            ><button
-              onclick="return confirm('Are you sure to Delete data');"
-              class="btn btn-danger"
-            >
-              Delete
-            </button>
-          </a>
-        </td>
-      </tr>
-  
-      {% endfor %}
-    </tbody>
-  </table>
-{% endblock form %}
+     {% block form %}
+     <div class="container">
 
- 
+          <div class="row">
 
+               <div class="col-md-4"></div>
+               <div class="col-md-4">
+                    <br>
+                    <form action="/doctors" method="post" class="jumbotron">
+                         <h4 class="text-center text-black">Doctors Booking</h4>
+                         <div class="form-group">
+
+                              <input type="email" class="form-control" name="email" value={{current_user.email}}
+                                   required>
+                         </div>
+                         <div class="form-group">
+                              <input type="text" class="form-control" name="doctorname" placeholder="Doctor Name"
+                                   required>
+                         </div>
+                         <div class="form-group">
+                              <input type="text" class="form-control" name="dept" placeholder="Doctor Department"
+                                   required>
+                         </div>
+                         <button type="submit" class="btn btn-warning btn-sm btn-block">Book</button>
+                    </form>
+               </div>
+               <div class="col-md-4"></div>
+          </div>
+     </div>
+     {% endblock form %}
      <!-- SCRIPTS -->
      <script src="../static/assets/js/jquery.js"></script>
      <script src="../static/assets/js/bootstrap.min.js"></script>
@@ -162,4 +136,5 @@ http://www.tooplate.com/view/2098-health -->
      <script src="../static/assets/js/custom.js"></script>
 
 </body>
-</html> 
+
+</html>

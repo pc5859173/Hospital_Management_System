@@ -8,11 +8,6 @@
      {% endblock title %}</title>
 
 
-<!-- Template 2098 Health
-
-http://www.tooplate.com/view/2098-health -->
-
-
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
      <meta name="description" content="">
@@ -84,9 +79,9 @@ http://www.tooplate.com/view/2098-health -->
                     <ul class="nav navbar-nav navbar-right">
                          <li><a href="/" class="smoothScroll">Home</a></li>
                          <li><a href="/doctors" class="smoothScroll">Doctors</a></li>
-                         <li><a href="/bookings" class="smoothScroll">Booking Details</a></li>
-                         <li><a href="/patientsbook" class="smoothScroll">patients Booking</a></li>
-                         <li><a href="/patients" class="smoothScroll">Login</a></li>
+                         <li><a href="/bookingdetails" class="smoothScroll">Booking Details</a></li>
+                         <li><a href="/patientbooking" class="smoothScroll">patients Booking</a></li>
+                         <!-- <li><a href="/patients" class="smoothScroll">Login</a></li> -->
                         
       
                          <!-- <li><a href="#news" class="smoothScroll">News</a></li> -->
@@ -119,25 +114,10 @@ http://www.tooplate.com/view/2098-health -->
         </div>
         <div class="col-md-6">
     
-            <form action="/patientsbook" method="post" class="jumbotron">
+            <form action="/pbooking" method="post" class="jumbotron">
                 <h4 class="text-center text-black"><b>Book your Slot</b></h4>
                 <br/>
-                <!-- {% with messages=get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                {% for category, message in messages %}
-                
-                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                    {{message}}
-                
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                
-                
-                  {% endfor %}
-                  {% endif %}
-                  {% endwith %}  -->
+             
                 <div class="form-group">
                   <input
                     type="email"
@@ -145,8 +125,7 @@ http://www.tooplate.com/view/2098-health -->
                     id="email"
                     value="{{current_user.email}}"
                     name="email"
-                    required
-                  />
+                    required>
                 </div>
                 <div class="form-group">
                   <input
@@ -155,8 +134,7 @@ http://www.tooplate.com/view/2098-health -->
                     id="name"
                     name="name"
                     placeholder="Full Name"
-                    required
-                  />
+                    required>
                 </div>
                 <div class="form-group">
                   <select class="form-control" id="gender" name="gender" required>
@@ -180,8 +158,7 @@ http://www.tooplate.com/view/2098-health -->
                     class="form-control"
                     name="time"
                     placeholder="Time"
-                    required
-                  />
+                    required>
                 </div>
                 <div class="form-group">
                   <input
@@ -189,8 +166,7 @@ http://www.tooplate.com/view/2098-health -->
                     class="form-control"
                     name="date"
                     placeholder="date"
-                    required
-                  />
+                    required>
                 </div>
                 <div class="form-group">
                   <input
@@ -199,27 +175,25 @@ http://www.tooplate.com/view/2098-health -->
                     id="disease"
                     name="disease"
                     placeholder="Disease"
-                    required
-                  />
+                    required>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <input
                       type="text"
                       class="form-control"
                       id="dept"
                       name="dept"
                       placeholder="Dr.Department"
-                      required
-                    />
-                  </div>
-                <!-- <div class="form-group">
+                      required>
+                  </div> -->
+                <div class="form-group">
                   <select class="form-control" id="dept" name="dept" required>
                     <option selected>Select Doctors department</option>
                     {% for d in doct %}
                     <option value="{{d.dept}}">{{d.dept}}</option>
                     {% endfor %} 
                   </select>
-                </div> -->
+                </div>
                 <div class="form-group">
                   <input
                     type="number"
@@ -227,8 +201,7 @@ http://www.tooplate.com/view/2098-health -->
                     id="number"
                     name="number"
                     placeholder="Phone Number"
-                    required
-                  />
+                    required/>
                 </div>
                 <button type="submit" class="btn btn-success btn-sm btn-block">
                   Book
@@ -238,10 +211,7 @@ http://www.tooplate.com/view/2098-health -->
     </div>
 </div>
 {% endblock form %}
-
- 
-
-     <!-- SCRIPTS -->
+<!-- SCRIPTS -->
      <script src="../static/assets/js/jquery.js"></script>
      <script src="../static/assets/js/bootstrap.min.js"></script>
      <script src="../static/assets/js/jquery.sticky.js"></script>

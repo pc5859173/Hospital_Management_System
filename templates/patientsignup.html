@@ -1,0 +1,35 @@
+{% extends 'baselogin.html' %}
+
+{% block form %}
+     <div class="container mt-3 ">
+        <div class="row">
+          
+            <div class="col-md-4"></div>
+            <div class="col-md-4 jumbotron mt-3">
+                <h3 class="text-center">Patient Signup</h3>
+                <br>
+      <form  action="/patient/signup" method="post">
+                    <div class="form-group" >
+                      <label for="username">UserName</label>
+                      <input type="text" class="form-control" id="username" name="username" required>
+                     </div>
+            <div class="form-group" >
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email"  required>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+              <div class="form-group">
+                      <label for="Password">Password</label>
+                      <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Signup</button>
+        </form>
+                <br>
+                Already a User <a href="/patient/login">Login</a>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        </div>
+        
+{% endblock form %}
