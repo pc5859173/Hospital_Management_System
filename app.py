@@ -62,13 +62,23 @@ class Doctorsdept(db.Model):
 
 @app.route('/flash/test')
 def f_test():
+    flash("Flash is working" , "warning")
     flash("Flash is working" , "info")
-    return render_template('Flash.html')
+    return render_template('adminlogin.html')
+
+@app.route('/image/test')
+def image_test():
+    return render_template('baselogin.html')
     
 # here we will pass endpoints and run the function
 
 # LOGIN ROUTE
 #route for admin_login
+@app.route('/admin/login')
+def admin_login():
+    return render_template('adminlogin.html')   
+
+
 @app.route('/admin/home', methods=['GET', 'POST'])
 def admin_home():
     if request.method == 'POST':
@@ -177,9 +187,6 @@ def home():
     return render_template("home.html")
 
 # route for admin before login
-@app.route('/admin/login')
-def admin_login():
-    return render_template('adminlogin.html')   
 
 # route for patients page after login
 @app.route('/patient/home')
