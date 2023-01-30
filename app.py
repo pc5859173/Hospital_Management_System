@@ -18,11 +18,13 @@ app.secret_key = "u>+eWoZ@_fV2K.>"
 
 # this is for getting unique user access
 login_manager=LoginManager(app)
-login_manager.login_view='plogin'
+login_manager.login_view='patient_login'
+login_manager.login_view='doctor_login'
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 
 # database connection
@@ -37,7 +39,7 @@ db = SQLAlchemy(app)
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username =  db.Column(db.String(100))  
-    email = db.Column(db.String(100))
+    email = db.Column(db.String(100),unique = True)
     password = db.Column(db.String(1000))
 
   # patient slot booking class
@@ -56,9 +58,27 @@ class Patientsbook(db.Model):
 # Doctors department booking Class
 class Doctorsdept(db.Model):
     ddid = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(1000))  
+    email = db.Column(db.String(1000),unique = True )  
     doctorname = db.Column(db.String(100))
-    dept = db.Column(db.String(100))    
+    dept = db.Column(db.String(100))   
+
+# trigr Class    
+class Trigr(db.Model):
+    tid=db.Column(db.Integer,primary_key=True)
+    pid=db.Column(db.Integer)
+    email=db.Column(db.String(50))
+    name=db.Column(db.String(50))
+    action=db.Column(db.String(50))
+    timestamp=db.Column(db.String(50))   
+
+# class Trigrdoct(db.Model):
+#     tdid=db.Column(db.Integer,primary_key=True)    
+#     ddid=db.Column(db.Integer)
+#     email=db.Column(db.String(50))
+#     doctorname=db.Column(db.String(50))
+#     dept = db.Column(db.String(100))
+#     action=db.Column(db.String(50))
+#     timestamp=db.Column(db.String(50)) 
 
 @app.route('/flash/test')
 def f_test():
@@ -68,7 +88,7 @@ def f_test():
 
 @app.route('/image/test')
 def image_test():
-    return render_template('baselogin.html')
+    return render_template('patientbooking.html')
     
 # here we will pass endpoints and run the function
 
@@ -78,20 +98,26 @@ def image_test():
 def admin_login():
     return render_template('adminlogin.html')   
 
+@app.route('/admin/verify')
+def check():
+    if session['user']=='Admin' :
+        return  render_template('adminhome.html') 
+    return redirect(url_for('admin_login'))
 
 @app.route('/admin/home', methods=['GET', 'POST'])
 def admin_home():
     if request.method == 'POST':
         name =request.form.get('username')
+        email = request.form.get('email')
         pwd = request.form.get('password')
-        if(name==params["username"] and pwd==params["password"]):
+        if(name==params["username"] and email==params["email"] and pwd==params["password"] ):
 
             session['user']=name
             flash("Successfully login" , "info")
             return render_template('adminhome.html')
         else:
             flash("Invalid credentials" , "warning")
-    return redirect( url_for('admin_login') )   
+    return redirect(url_for('admin_login'))
 
 # route for patient_login
 @app.route('/patient/login',methods = ['GET','POST'])
@@ -102,11 +128,11 @@ def patient_login():
         user=User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password,password):
             login_user(user)
-            flash("Login Successfull", "success")
-            return redirect(url_for('patient_home'))
+            flash("Login Successfull", "info")
+            return render_template('patienthome.html')
         else:
-            flash("Invalid Credentials" , "danger") 
-            return redirect(url_for('patient_login'))   
+            flash("Invalid Credentials" , "warning") 
+            # return redirect(url_for('patient_login'))   
     return render_template("patientlogin.html")    
 
 # route for doctors_login
@@ -119,11 +145,11 @@ def doctor_login():
         user=User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password,password):
             login_user(user)
-            flash("Login Successfull", "success")
+            flash("Login Successfull", "info")
             return redirect(url_for('doctor_home'))
         else:
-            flash("Invalid Credentials" , "danger") 
-            return redirect(url_for('doctor_login'))   
+            flash("Invalid Credentials" , "warning") 
+            # return redirect(url_for('doctor_login'))   
     return render_template("doctorlogin.html")     
 
 # SIGNUP ROUTE
@@ -145,7 +171,7 @@ def patient_signup():
         entry = User(username=username, email=email, password=encpassword)   
         db.session.add(entry)
         db.session.commit() 
-        flash("Signup Successfull Please Login","primary")
+        flash("Signup Successfull Please Login","info")
         return redirect(url_for('patient_login')) 
     return render_template("patientsignup.html") 
 
@@ -167,7 +193,7 @@ def doctor_signup():
         entry = User(username=username, email=email, password=encpassword)   
         db.session.add(entry)
         db.session.commit() 
-        flash("Signup Successfull Please Login","primary")
+        flash("Signup Successfull Please Login","info")
         return redirect(url_for('doctor_login')) 
     return render_template("doctorsignup.html") 
 
@@ -180,27 +206,61 @@ def logout():
     flash("logout Successfull", "warning")
     return render_template('home.html')
 
+
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('user')
+    flash("logout Successfull", "warning")
+    return render_template('home.html')
+
 #HOME ROUTE
 # route for home 
 @app.route('/')
 def home():
     return render_template("home.html")
 
-# route for admin before login
+# route for trigr in patient page
+@app.route('/appointment/details')
+def appointment_details():
+    posts=Trigr.query.all()
+    return render_template('trigers.html',posts=posts) 
 
 # route for patients page after login
 @app.route('/patient/home')
 def patient_home():
-    return render_template('patienthome.html')     
+    return render_template('patienthome.html')    
+
+# route for patients page after login booking details
+@app.route('/getall/bookpatient')
+def patient_getbooking():
+    return render_template('patientbookdet.html') 
+
+# route for patients page after login slot book
+@app.route('/bookall/slot')
+def patient_slotbook():
+    return render_template('pbookslot.html')     
+
 
 # route for Doctors page after login
 @app.route('/doctor/home')
 def doctor_home():
     return render_template('doctorhome.html')    
 
+# route for Doctors page after login doctordept
+@app.route('/getall/doctordept')
+def doctor_getdept():
+    return render_template('doctorhomedept.html')        
+
+# route for Doctors page after login trigerdoct
+# @app.route('/getall/trigerdoct')
+# def doctor_trigerdoct():
+#  posts=Trigrdoct.query.all()
+#     return render_template('trigerdoct.html')      
+
 # route for patients slot booking
-@app.route('/patientbooking', methods= ['GET','POST'])
+@app.route('/patient/booking', methods= ['GET','POST'])
 def patient_booking():
+     doct=db.engine.execute("SELECT * FROM `doctorsdept` ")
      if request.method == "POST":
         email = request.form['email']
         name = request.form['name']
@@ -217,15 +277,24 @@ def patient_booking():
         db.session.add(entry)
         db.session.commit()
         flash("Booking Confirmed", "info")
-     return render_template('patientbooking.html')    
+
+        # insert query for trigr
+        db.engine.execute("CREATE TRIGGER `patientinsertion` AFTER INSERT ON `patientsbook`FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT INSERTED',NOW());")
+        # update query for trigr
+        db.engine.execute("CREATE TRIGGER `patientupdated` AFTER UPDATE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT UPDATED',NOW());")
+        # delete query for trigr
+        db.engine.execute("CREATE TRIGGER `patientdeleted` BEFORE DELETE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,OLD.pid,OLD.email,OLD.name,'PATIENT DELETED',NOW());")
+     
+     
+     return render_template('patientbooking.html',doct=doct)    
 
 # route for booking details page
-# @app.route('/bookings/details')
-@app.route('/bookingdetails')
+@app.route('/booking/details')
 # @login_required
 def booking_details(): 
-    em=current_user.email
-    print(em)
+    # em=current_user.email
+    em=params['email']
+    # print(em)
     # em="priya@gmail.com"
     query=db.engine.execute(f"SELECT * FROM patientsbook WHERE email='{em}'")
     # query=db.engine.execute(f"SELECT * FROM [dbo].[patientsbook] WHERE email='{em}'")
@@ -249,8 +318,8 @@ def edit(pid):
 
         # update query in patientbook class
         db.engine.execute(f"UPDATE Patientsbook SET email = '{email}', name = '{name}', gender = '{gender}', slot = '{slot}', disease = '{disease}', time = '{time}', date = '{date}', dept = '{dept}', number = '{number}' WHERE Patientsbook.pid = '{pid}'")       
-        flash("Slot is Updates","success")
-        return redirect('/bookingdetails')
+        flash("Slot is Updates","info")
+        return redirect('/booking/details')
     return render_template('edit.html',posts=posts)
 
 # route for delete in booking details page
@@ -258,8 +327,9 @@ def edit(pid):
 # @login_required
 def delete(pid):  
     # delete query in patientbook class
-    db.engine.execute(f"DELETE FROM [dbo].[Patientsbook] WHERE Patientsbook.pid={pid}")
-    flash("slot Deleted Successfully", "danger") 
+    # db.engine.execute(f"DELETE FROM [dbo].[Patientsbook] WHERE Patientsbook.pid={pid}")
+    db.engine.execute(f"DELETE FROM Patientsbook WHERE Patientsbook.pid={pid}")
+    flash("slot Deleted Successfully", "warning") 
     return redirect(url_for('booking_details'))   
 
 # route for doctors department booking
@@ -274,8 +344,14 @@ def doctor_department():
         entry=Doctorsdept(email=email, doctorname = doctorname, dept=dept)
         db.session.add(entry)
         db.session.commit()
-        flash("Information is Stored","primary")
+        flash("Information is Stored","info")
+
+        #query for insert trigrdoct
+        # db.engine.execute("CREATE TRIGGER `doctorsdeptinsertion` AFTER INSERT ON `doctorsdept` FOR EACH ROW INSERT INTO trigrdoct VALUES( NEW.ddid, NEW.email, NEW.doctorname, 'DOCTOR DEPARTMENT INSERTED',NOW());")
+        
     return render_template("doctordepartment.html")    
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,35 +1,55 @@
+
+
 {% extends 'baselogin.html' %}
 
+
+
 {% block form %}
-     <div class="container mt-3 ">
+
+
+<section id="home" class="slider" data-stellar-background-ratio="0.5">
+    <div class="container">
         <div class="row">
-          
-            <div class="col-md-4"></div>
-            <div class="col-md-4 jumbotron mt-3">
-                <h3 class="text-center">Patient Signup</h3>
-                <br>
-      <form  action="/patient/signup" method="post">
-                    <div class="form-group" >
-                      <label for="username">UserName</label>
-                      <input type="text" class="form-control" id="username" name="username" required>
-                     </div>
-            <div class="form-group" >
-                        <label for="email">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email"  required>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-              <div class="form-group">
-                      <label for="Password">Password</label>
-                      <input type="password" class="form-control" id="password" name="password" required>
+
+            <div class="owl-carousel owl-theme">
+                <div class="item item-second">
+                    <div class="mycontainer">
+                        <section class="container-xy forms">
+                            <div class="form login">
+                                <div class="form-content">
+                                    <div class="flash">
+                                        {% include 'message.html' %}
+                                    </div>
+                                    <header>Login</header>
+                                    <form  action="/patient/signup" method="post">
+                                      <div class="form-group" >
+                                        <label for="username">UserName</label>
+                                        <input type="text" class="form-control" id="username" name="username" required>
+                                       </div>
+                              <div class="form-group" >
+                                          <label for="email">Email Address</label>
+                                          <input type="email" class="form-control" id="email" name="email"  required>
+                                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                              </div>
+                                <div class="form-group">
+                                        <label for="Password">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" required>
+                                      </div>
+                                      <br>
+                                      <button type="submit" class="btn btn-success btn-lg btn-block">Signup</button>
+                          </form>
+                                    <div class="form-link">
+                                        <span>Already have an account? <a href="/patient/login"
+                                                class="link signup-link">Signup</a></span>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-                    
-                    <button type="submit" class="btn btn-success btn-lg btn-block">Signup</button>
-        </form>
-                <br>
-                Already a User <a href="/patient/login">Login</a>
+                </div>
             </div>
-            <div class="col-md-4"></div>
+
         </div>
-        </div>
-        
+    </div>
+</section>
+
 {% endblock form %}

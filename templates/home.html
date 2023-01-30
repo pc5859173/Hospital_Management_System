@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}
-
+HOME PAGE
 {% endblock title %}
+
 
 {% block navbar %}
 <li><a href="/" class="smoothScroll">Home</a></li>
-
+  
 {% endblock navbar %}
+
 
 {% block dropdown %}
 <li>
@@ -20,3 +22,6 @@
   </div>
 </li>
 {% endblock dropdown %}
+<div class="flash">
+  {% include 'message.html' %}
+</div>

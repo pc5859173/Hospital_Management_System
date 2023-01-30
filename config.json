@@ -2,7 +2,8 @@
     "params":
     {
         "username" : "Admin",
-        "password" : "priya"
+        "password" : "priya",
+        "email"    : "priyachoudhary3571@gmail.com"
         
     }
 }
