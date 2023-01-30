@@ -79,22 +79,31 @@
                </div>
 
                <!-- MENU LINKS -->
+               {% block navbar %}
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                          <li><a href="/" class="smoothScroll">Home</a></li>
-                         <li><div class="dropdown">
-                              <button class="dropbtn">Login</button>
-                              <div class="dropdown-content">
-                                   <a href="/patient/login">Patients Login</a>
-                                   <a href="/doctor/login">Doctors Login</a>
-                                   <a href="/admin/login">Admin Login</a>
-                              </div>
-                             </div>
-                         </li>
-                         <li class="appointment-btn"><a href="/logout">logout</a></li>
+                    {% if current_user%}
+                    <li><div class="dropdown">
+                         <button class="dropbtn">Login</button>
+                         <div class="dropdown-content">
+                              <a href="/patient/login">Patients Login</a>
+                              <a href="/doctor/login">Doctors Login</a>
+                              <a href="/admin/login">Admin Login</a>
+                         </div>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="appointment-btn"><a href="/logout">logout</a></li>
+                    
+                    {% endif %}
+                        
+                         
                     </li>                    
                     </ul>
                </div>
+               {% endblock navbar %}
+               
 
           </div>
      </section>
