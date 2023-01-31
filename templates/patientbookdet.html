@@ -2,6 +2,8 @@
 
 {% block title %}Patient Booking Details{% endblock title %}
 
+{% block messages %}{% endblock messages %}
+
 {% block body %}
 <section id="home" class="slider" data-stellar-background-ratio="0.5">
     <div class="container">
@@ -47,8 +49,8 @@
                                                  <td>{{post.time}}</td>
                                                  <td>{{post.dept}}</td>
                                                  <td>{{post.number}}</td>
-                                                 <td><a href="/edit/{{post.pid}}"><button class="btn btn-primary">Edit </button> </a> </td>
-                                                 <td><a href="/delete/{{post.pid}}"><button onclick="return confirm('Are you sure to Delete data');"
+                                                 <td><a href="/patientedit/{{post.pid}}"><button class="btn btn-primary">Edit </button> </a> </td>
+                                                 <td><a href="/patientdelete/{{post.pid}}"><button onclick="return confirm('Are you sure to Delete data');"
                                                                 class="btn btn-danger">Delete </button> </a> </td>
                                             </tr>
                                             {% endfor %}

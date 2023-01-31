@@ -27,9 +27,12 @@
 
 
 </head>
+{% block messages %}
 <div class="flash">
-    {% include 'message.html' %}
+  {% include 'message.html' %}
 </div>
+{% endblock messages %}
+
 <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
   <!-- PRE LOADER -->
   <section class="preloader">
@@ -77,7 +80,7 @@
             <li><a href="/admin/verify" class="smoothScroll">Home</a></li>
             <li><a href="/doctor/department" class="smoothScroll">Doctors</a></li>
             <li><a href="/booking/details" class="smoothScroll">Booking Details</a></li>
-            <li><a href="/patient/booking" class="smoothScroll">patient Booking</a></li>
+            <li><a href="/bookall/slot" class="smoothScroll">patient Booking</a></li>
             <li><a href="/appointment/details" class="smoothScroll">patient Details</a></li>
            
               <li class="appointment-btn">

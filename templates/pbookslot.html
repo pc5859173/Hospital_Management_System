@@ -1,5 +1,6 @@
-{% extends 'patienthome.html' %}
+{% extends 'adminhome.html' %}
 {% block title %}PATIENT SLOT BOOKING{% endblock title %}
+{% block messages %}{% endblock messages %}
 {% block body %}
 <section id="home" class="slider" data-stellar-background-ratio="0.5">
   <div class="container">
@@ -34,7 +35,7 @@
                                       {% include 'message.html' %}
                                   </div>
                                   <header>Book Your Slot</header>
-                                  <form  action="/patient/booking" method="post">
+                                  <form  action="/bookall/slot" method="post">
                                     <div class="form-group">
                                       <input
                                         type="email"
@@ -96,7 +97,7 @@
                                         autocomplete="off"
                                         required>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <input
                                           type="text"
                                           class="form-control"
@@ -104,15 +105,15 @@
                                           name="dept"
                                           placeholder="Dr.Department"
                                           required>
-                                      </div>
-                                    <!-- <div class="form-group">
+                                      </div> -->
+                                    <div class="form-group">
                                       <select class="form-control" id="dept" name="dept" required>
                                         <option selected>Select Doctors department</option>
                                         {% for d in doct %}
                                         <option value="{{d.dept}}">{{d.dept}}</option>
                                         {% endfor %} 
                                       </select>
-                                    </div> -->
+                                    </div>
                                     <div class="form-group">
                                       <input
                                         type="number"

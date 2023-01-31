@@ -233,12 +233,35 @@ def patient_home():
 # route for patients page after login booking details
 @app.route('/getall/bookpatient')
 def patient_getbooking():
-    return render_template('patientbookdet.html') 
+    em=current_user.email
+    # em=params['email']
+    # print(em)
+    # em="priya@gmail.com"
+    query=db.engine.execute(f"SELECT * FROM patientsbook WHERE email='{em}'")
+    # query=db.engine.execute(f"SELECT * FROM [dbo].[patientsbook] WHERE email='{em}'")
+    return render_template('patientbookdet.html',query=query) 
 
 # route for patients page after login slot book
-@app.route('/bookall/slot')
+@app.route('/bookall/slot', methods=['POST', 'GET'])
 def patient_slotbook():
-    return render_template('pbookslot.html')     
+     doct=db.engine.execute("SELECT * FROM `doctorsdept` ")
+     if request.method == "POST":
+        email = request.form['email']
+        name = request.form['name']
+        gender = request.form['gender']
+        slot = request.form['slot']
+        time = request.form['time']
+        date = request.form['date']
+        disease =request.form['disease'] 
+        dept = request.form['dept']
+        number = request.form['number']
+        
+        # method to insert data in patientbook class
+        entry = Patientsbook(email = email, name = name, gender = gender, slot = slot  ,time =time ,date =date ,disease =disease ,dept =dept, number = number)
+        db.session.add(entry)
+        db.session.commit()
+        flash("Booking Confirmed", "info")
+     return render_template('pbookslot.html',doct=doct)     
 
 
 # route for Doctors page after login
@@ -247,8 +270,19 @@ def doctor_home():
     return render_template('doctorhome.html')    
 
 # route for Doctors page after login doctordept
-@app.route('/getall/doctordept')
-def doctor_getdept():
+@app.route('/getall/doctordept', methods=['POST', 'GET'])
+def doctor_getdept(): 
+    if request.method=="POST":
+        email=request.form.get('email')
+        doctorname=request.form.get('doctorname')
+        dept=request.form.get('dept')
+
+        #method to insert data in doctordept class
+        entry=Doctorsdept(email=email, doctorname = doctorname, dept=dept)
+        db.session.add(entry)
+        db.session.commit()
+        flash("Information is Stored","info")
+
     return render_template('doctorhomedept.html')        
 
 # route for Doctors page after login trigerdoct
@@ -279,14 +313,46 @@ def patient_booking():
         flash("Booking Confirmed", "info")
 
         # insert query for trigr
-        db.engine.execute("CREATE TRIGGER `patientinsertion` AFTER INSERT ON `patientsbook`FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT INSERTED',NOW());")
+        # db.engine.execute("CREATE TRIGGER `patientinsertion` AFTER INSERT ON `patientsbook`FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT INSERTED',NOW());")
         # update query for trigr
-        db.engine.execute("CREATE TRIGGER `patientupdated` AFTER UPDATE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT UPDATED',NOW());")
+        # db.engine.execute("CREATE TRIGGER `patientupdated` AFTER UPDATE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT UPDATED',NOW());")
         # delete query for trigr
-        db.engine.execute("CREATE TRIGGER `patientdeleted` BEFORE DELETE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,OLD.pid,OLD.email,OLD.name,'PATIENT DELETED',NOW());")
+        # db.engine.execute("CREATE TRIGGER `patientdeleted` BEFORE DELETE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,OLD.pid,OLD.email,OLD.name,'PATIENT DELETED',NOW());")
      
-     
-     return render_template('patientbooking.html',doct=doct)    
+     return render_template('patientbooking.html',doct=doct)  
+
+# route for edit patient details in patient page
+@app.route("/patientedit/<string:pid>",methods=['POST','GET'])
+# @login_required
+def patient_edit(pid):
+    posts=Patientsbook.query.filter_by(pid=pid).first()
+    if request.method=="POST":
+        email=request.form.get('email')
+        name=request.form.get('name')
+        gender=request.form.get('gender')
+        slot=request.form.get('slot')
+        disease=request.form.get('disease')
+        time=request.form.get('time')
+        date=request.form.get('date')
+        dept=request.form.get('dept')
+        number=request.form.get('number')
+
+        # update query in patientbook class
+        db.engine.execute(f"UPDATE Patientsbook SET email = '{email}', name = '{name}', gender = '{gender}', slot = '{slot}', disease = '{disease}', time = '{time}', date = '{date}', dept = '{dept}', number = '{number}' WHERE Patientsbook.pid = '{pid}'")       
+        flash("Slot is Updates","info")
+        return redirect('/getall/bookpatient')
+    return render_template('patientedit.html',posts=posts)
+
+
+# route for delete in booking details page
+@app.route("/patientdelete/<string:pid>",methods=['POST','GET'])
+# @login_required
+def patient_delete(pid):  
+    # delete query in patientbook class
+    # db.engine.execute(f"DELETE FROM [dbo].[Patientsbook] WHERE Patientsbook.pid={pid}")
+    db.engine.execute(f"DELETE FROM Patientsbook WHERE Patientsbook.pid={pid}")
+    flash("slot Deleted Successfully", "warning") 
+    return redirect(url_for('patient_getbooking'))   
 
 # route for booking details page
 @app.route('/booking/details')
@@ -300,7 +366,7 @@ def booking_details():
     # query=db.engine.execute(f"SELECT * FROM [dbo].[patientsbook] WHERE email='{em}'")
     return render_template('bookingdetails.html', query=query)
 
-# route for edit patient details page
+# route for edit patient details in admin page
 @app.route("/edit/<string:pid>",methods=['POST','GET'])
 # @login_required
 def edit(pid):
