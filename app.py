@@ -71,14 +71,16 @@ class Trigr(db.Model):
     action=db.Column(db.String(50))
     timestamp=db.Column(db.String(50))   
 
-# class Trigrdoct(db.Model):
-#     tdid=db.Column(db.Integer,primary_key=True)    
-#     ddid=db.Column(db.Integer)
-#     email=db.Column(db.String(50))
-#     doctorname=db.Column(db.String(50))
-#     dept = db.Column(db.String(100))
-#     action=db.Column(db.String(50))
-#     timestamp=db.Column(db.String(50)) 
+# from Hospital_Management_System.blueprint.routes import bp as Hospital_bp
+# app.register_blueprint(Hospital_bp)
+class Trigrdoct(db.Model):
+    tdid=db.Column(db.Integer,primary_key=True)    
+    ddid=db.Column(db.Integer)
+    email=db.Column(db.String(50))
+    doctorname=db.Column(db.String(50))
+    dept = db.Column(db.String(100))
+    action=db.Column(db.String(50))
+    timestamp=db.Column(db.String(50)) 
 
 @app.route('/flash/test')
 def f_test():
