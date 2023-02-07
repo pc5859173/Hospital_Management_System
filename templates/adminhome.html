@@ -82,10 +82,32 @@
             <li><a href="/booking/details" class="smoothScroll">Booking Details</a></li>
             <li><a href="/bookall/slot" class="smoothScroll">patient Booking</a></li>
             <li><a href="/appointment/details" class="smoothScroll">patient Details</a></li>
-           
-              <li class="appointment-btn">
+            {% if session['user']=='Admin'%}
+            <li><div class="dropdown">
+                 <button class="dropbtn">Welcome Admin</button>
+                 <div class="dropdown-content">
+                      <a href="/logout">Logout</a>
+                      <!-- <a href="/doctor/login">Doctors Login</a>
+                      <a href="/admin/login">Admin Login</a> -->
+                 </div>
+                </div>
+            </li>
+            <!-- <li class="appointment-btn"><a href="/logout">logout</a></li> -->
+            {% endif %}
+            {% if not session['user']=='Admin'%}
+            <li><div class="dropdown">
+                 <button class="dropbtn">Login</button>
+                 <div class="dropdown-content">
+                      <a href="/patient/login">Patients Login</a>
+                      <a href="/doctor/login">Doctors Login</a>
+                      <a href="/admin/login">Admin Login</a>
+                 </div>
+                </div>
+            </li>
+           {% endif %}
+              <!-- <li class="appointment-btn">
                 <a href="/admin/logout" >logout</a>
-              </li>
+              </li> -->
         </ul>
       </div>
     </div>

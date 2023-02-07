@@ -84,11 +84,34 @@
            
             <li><a href="/getall/bookpatient" class="smoothScroll">Booking Details</a></li>
             <li><a href="/patient/booking" class="smoothScroll">patient Booking</a></li>
-          
+            
+            {% if current_user.is_authenticated%}
+            <li><div class="dropdown">
+                 <button class="dropbtn">Welcome {{current_user.username}}</button>
+                 <div class="dropdown-content">
+                      <a href="/logout">Logout</a>
+                      <!-- <a href="/doctor/login">Doctors Login</a>
+                      <a href="/admin/login">Admin Login</a> -->
+                 </div>
+                </div>
+            </li>
+            <!-- <li class="appointment-btn"><a href="/logout">logout</a></li> -->
+            {% endif %}
+            {% if not current_user.is_authenticated%}
+            <li><div class="dropdown">
+                 <button class="dropbtn">Login</button>
+                 <div class="dropdown-content">
+                      <a href="/patient/login">Patients Login</a>
+                      <a href="/doctor/login">Doctors Login</a>
+                      <a href="/admin/login">Admin Login</a>
+                 </div>
+                </div>
+            </li>
+           {% endif %}
            
-              <li class="appointment-btn">
+              <!-- <li class="appointment-btn">
                 <a href="/logout" >logout</a>
-              </li>
+              </li> -->
         </ul>
       </div>
     </div>
