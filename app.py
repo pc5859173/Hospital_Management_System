@@ -315,11 +315,11 @@ def patient_booking():
         flash("Booking Confirmed", "info")
 
         # insert query for trigr
-        # db.engine.execute("CREATE TRIGGER `patientinsertion` AFTER INSERT ON `patientsbook`FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT INSERTED',NOW());")
+        db.engine.execute("CREATE TRIGGER `patientinsertion` AFTER INSERT ON `patientsbook`FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT INSERTED',NOW());")
         # update query for trigr
-        # db.engine.execute("CREATE TRIGGER `patientupdated` AFTER UPDATE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT UPDATED',NOW());")
+        db.engine.execute("CREATE TRIGGER `patientupdated` AFTER UPDATE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,NEW.pid,NEW.email,NEW.name,'PATIENT UPDATED',NOW());")
         # delete query for trigr
-        # db.engine.execute("CREATE TRIGGER `patientdeleted` BEFORE DELETE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,OLD.pid,OLD.email,OLD.name,'PATIENT DELETED',NOW());")
+        db.engine.execute("CREATE TRIGGER `patientdeleted` BEFORE DELETE ON `patientsbook` FOR EACH ROW INSERT INTO trigr VALUES(null,OLD.pid,OLD.email,OLD.name,'PATIENT DELETED',NOW());")
      
      return render_template('patientbooking.html',doct=doct)  
 
